@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Livraison</title>
+    <style>
+        /* styles.css */
+
+        /* Styles de base */
+        :root {
+            --color-gray: #737888;
+            --color-lighter-gray: #e3e5ed;
+            --color-light-gray: #f7f7fa;
+            --color-primary: #f79aea;
+            --color-secondary: #e6e6fa;
+            --color-text: #343a40;
+            --color-white: #ffffff;
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        html {
+            font-family: "Inter", sans-serif;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #fcf7fd;
+            color: var(--color-text);
+        }
+
+        /* Barre de navigation en haut */
+        .top-bar {
+            background-color: #f3e5f5; /* Violet très clair */
+            padding: 15px 20px; /* Barre plus épaisse */
+            display: flex;
+            justify-content: flex-end;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        }
+
+        .top-bar a {
+            text-decoration: none;
+            color: var(--color-text);
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .top-bar a:hover {
+            color: var(--color-primary);
+        }
+
+        /* Conteneur principal */
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: var(--color-white);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container p {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container hr {
+            border: 0;
+            height: 1px;
+            background: var(--color-lighter-gray);
+            margin: 20px 0;
+        }
+
+        /* Formulaire de livraison */
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .fields {
+            display: flex;
+            gap: 20px;
+        }
+
+        .fields--2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .fields--3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field__label {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--color-text);
+        }
+
+        .field__input {
+            padding: 10px;
+            border: 1px solid var(--color-lighter-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .field__input:focus {
+            border-color: var(--color-primary);
+            outline: none;
+        }
+
+        /* Affichage des frais de livraison */
+        .delivery-fee {
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            color: var(--color-text);
+        }
+
+        /* Bouton de continuation */
+        .button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #f472b6;
+        }
+
+        /* Section de contact en bas de page */
+        .contact-footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--color-text);
+            color: var(--color-white);
+            margin-top: 50px;
+        }
+
+        .contact-footer a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .contact-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre de navigation en haut -->
+    <div class="top-bar">
+        <a href="pageacceuil.html">Accueil</a>
+        <a href="pagedeconnexion.html">Connexion</a>
+        <a href="pagecontact.html">Contact</a>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>Livraison</h1>
+        <p>Veuillez entrer vos informations de livraison.</p>
+        <hr />
+        <div class="form">
+            <div class="fields fields--2">
+                <label class="field">
+                    <span class="field__label" for="firstname">Prénom</span>
+                    <input class="field__input" type="text" id="firstname" value="Jean" />
+                </label>
+                <label class="field">
+                    <span class="field__label" for="lastname">Nom de famille</span>
+                    <input class="field__input" type="text" id="lastname" value="Dupont" />
+                </label>
+            </div>
+            <label class="field">
+                <span class="field__label" for="address">Adresse</span>
+                <input class="field__input" type="text" id="address" />
+            </label>
+            <label class="field">
+                <span class="field__label" for="country">Pays</span>
+                <select class="field__input" id="country">
+                    <option value=""></option>
+                    <option value="france">France</option>
+                    <option value="algerie">Algérie</option>
+                    <option value="tunisie">Tunisie</option>
+                </select>
+            </label>
+            <div class="fields fields--3">
+                <label class="field">
+                    <span class="field__label" for="zipcode">Code postal</span>
+                    <input class="field__input" type="text" id="zipcode" />
+                </label>
+                <label class="field">
+                    <span class="field__label" for="city">Ville</span>
+                    <input class="field__input" type="text" id="city" />
+                </label>
+                <label class="field">
+                    <span class="field__label" for="state">Région</span>
+                    <select class="field__input" id="state">
+                        <option value=""></option>
+                        <option value="iledefrance">Île-de-France</option>
+                        <option value="provence">Provence-Alpes-Côte d'Azur</option>
+                        <option value="nouvelleaquitaine">Nouvelle-Aquitaine</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        <!-- Affichage des frais de livraison -->
+        <div class="delivery-fee" id="delivery-fee">
+            Frais de livraison : 9,99 € (Algérie) ou 25 € (hors Algérie)
+        </div>
+        <hr>
+        <a href="pagedepaiment.html" class="button">Continuer</a>
+    </div>
+
+    <!-- Section en bas de la page -->
+    <div class="contact-footer">
+        Vous avez une question ou souhaitez passer commande ? Contactez-nous directement.
+    </div>
+
+    <!-- Lien vers le fichier JavaScript externe -->
+    <script src="js/script.js"></script>
+</body>
+</html>

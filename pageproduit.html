@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Grid with Buttons</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Styles de base */
+        :root {
+            --color-primary: #e6e6fa; /* Violet clair */
+            --color-secondary: #f79aea; /* Rose */
+            --color-text: #343a40; /* Noir */
+            --color-white: #ffffff; /* Blanc */
+            --color-gray: #737888; /* Gris */
+            --color-light-gray: #f7f7fa; /* Gris clair */
+            --color-dark-gray: #555; /* Gris foncé */
+            --color-shadow: rgba(0, 0, 0, 0.1); /* Ombre légère */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--color-light-gray);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        /* Barre violette clair en haut (élargie) */
+        .top-bar {
+            background-color: var(--color-primary);
+            padding: 20px 20px; /* Élargissement de la barre */
+            box-shadow: 0 2px 5px var(--color-shadow);
+        }
+
+        .header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .top-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .top-links a:hover {
+            color: var(--color-secondary);
+        }
+
+        /* Phrase de bienvenue centrée */
+        .welcome-message {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 30px 0;
+            color: var(--color-text);
+            padding: 0 20px;
+        }
+
+        /* Galerie d'images */
+        .gallery {
+            text-align: center;
+            margin: 20px 0;
+            padding: 0 20px;
+            position: relative;
+            height: 300px; /* Hauteur fixe pour la galerie */
+            overflow: hidden;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .gallery img.active {
+            opacity: 1;
+        }
+
+        /* Conteneur principal */
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Grille de produits */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-item {
+            background-color: var(--color-white);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--color-shadow);
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-item img {
+            max-width: 100%;
+            height: 200px; /* Hauteur fixe pour les images */
+            object-fit: cover; /* Pour éviter la déformation */
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product-item h3 {
+            font-size: 1.3rem;
+            margin: 15px 0;
+            color: var(--color-text);
+            flex-grow: 1; /* Pour aligner les titres */
+        }
+
+        .product-item p {
+            font-size: 1rem;
+            color: var(--color-gray);
+            margin-bottom: 15px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .button-group button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--color-primary);
+            color: var(--color-text);
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .button-group button:hover {
+            background-color: var(--color-secondary);
+            color: var(--color-white);
+        }
+
+        .button-group button.active {
+            background-color: var(--color-secondary); /* Couleur pour les boutons actifs */
+            color: var(--color-white);
+        }
+
+        .button-group button.inactive {
+            background-color: var(--color-primary); /* Couleur pour les boutons inactifs */
+            color: var(--color-text);
+        }
+
+        .add-to-cart {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--color-secondary);
+            color: var(--color-white);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #f472b6; /* Une teinte plus foncée de rose */
+        }
+
+        /* Section de contact en bas de la page */
+        .contact-footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--color-primary);
+            color: var(--color-text);
+            margin-top: 40px;
+            font-size: 1.1rem;
+            box-shadow: 0 -2px 5px var(--color-shadow);
+        }
+
+        .contact-footer p {
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .welcome-message {
+                font-size: 1.5rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .button-group button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-links a {
+                margin: 0 10px;
+                font-size: 0.9rem;
+            }
+
+            .welcome-message {
+                font-size: 1.3rem;
+            }
+
+            .product-item h3 {
+                font-size: 1.1rem;
+            }
+
+            .product-item p {
+                font-size: 0.9rem;
+            }
+
+            .add-to-cart {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre violette clair en haut (élargie) -->
+    <div class="top-bar">
+        <div class="header">
+            <div class="top-links">
+                <a href="pageacceuil.html">Accueil</a>
+                <a href="pagedeconnexion.html">Connexion</a>
+                <a href="pagelivraison.html">Livraison</a>
+                <a href="pagecontact.html">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phrase de bienvenue centrée -->
+    <div class="welcome-message">
+        Bienvenue, là où chaque fleur illumine votre journée !
+    </div>
+
+    <!-- Galerie d'images -->
+    <div class="gallery">
+        <img src="https://i.123fleurs.com/18/images/marketing/slideshow/fr/nouvel-an-2.jpg" alt="Image 1" class="active">
+        <img src="https://i.123fleurs.com/18/images/marketing/slideshow/fr/hp-deuil-1.jpg" alt="Image 2">
+        <img src="https://i.123fleurs.com/18/images/marketing/slideshow/fr/hp-tulipes-1.jpg" alt="Image 3">
+    </div>
+
+    <div class="container">
+        <div class="product-grid">
+            <!-- Ligne 1 -->
+            <div class="product-item">
+                <img src="https://media.istockphoto.com/id/155357427/photo/bouquet.webp?a=1&b=1&s=612x612&w=0&k=20&c=ZQQMp32H6tbjIbRtGJohn3nvMCuiuvYCZBdbIks6qKs=" alt="Bouquet Douceur de tulipes et roses">
+                <h3>Bouquet Douceur de tulipes et roses</h3>
+                <p>Prix : <span class="price" data-price-petit="34.00" data-price-grand="44.00">34,00 €</span></p>
+                <div class="button-group">
+                    <button onclick="updatePrice(this, 'petit')">Petit</button>
+                    <button onclick="updatePrice(this, 'grand')">Grand</button>
+                </div>
+                <a href="pagelivraison.html" class="add-to-cart">Acheter</a>
+            </div>
+            <div class="product-item">
+                <img src="https://plus.unsplash.com/premium_photo-1676107105695-5c7393154849?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Ym91cXVldCUyMG9fJTIwZmxvd2Vyc3xlbnwwfHwwfHx8MA%3D%3D" alt="Bouquet Rabie">
+                <h3>Bouquet Rabie</h3>
+                <p>Prix : <span class="price" data-price-petit="32.00" data-price-grand="42.00">32,00 €</span></p>
+                <div class="button-group">
+                    <button onclick="updatePrice(this, 'petit')">Petit</button>
+                    <button onclick="updatePrice(this, 'grand')">Grand</button>
+                </div>
+                <a href="pagelivraison.html" class="add-to-cart">Acheter</a>
+            </div>
+            <div class="product-item">
+                <img src="https://plus.unsplash.com/premium_photo-1669997826684-785d9039f547?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Ym91cXVldCUyMG9fJTIwZmxvd2VycyUyMFJFRHxlbnwwfHwwfHx8MA%3D%3D" alt="Bouquet Naital">
+                <h3>Bouquet Naital</h3>
+                <p>Prix : <span class="price" data-price-petit="30.00" data-price-grand="40.00">30,00 €</span></p>
+                <div class="button-group">
+                    <button onclick="updatePrice(this, 'petit')">Petit</button>
+                    <button onclick="updatePrice(this, 'grand')">Grand</button>
+                </div>
+                <a href="pagelivraison.html" class="add-to-cart">Acheter</a>
+            </div>
+
+            <!-- Ligne 2 -->
+            <div class="product-item">
+                <img src="https://images.pexels.com/photos/4499854/pexels-photo-4499854.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bouquet Élégance">
+                <h3>Bouquet Élégance</h3>
+                <p>Prix : <span class="price" data-price-petit="40.00" data-price-grand="50.00">40,00 €</span></p>
+                <div class="button-group">
+                    <button onclick="updatePrice(this, 'petit')">Petit</button>
+                    <button onclick="updatePrice(this, 'grand')">Grand</button>
+                </div>
+                <a href="pagelivraison.html" class="add-to-cart">Acheter</a>
+            </div>
+            <div class="product-item">
+                <img src="https://images.pexels.com/photos/7910902/pexels-photo-7910902.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bouquet Printemps">
+                <h3>Bouquet Printemps</h3>
+                <p>Prix : <span class="price" data-price-petit="28.00" data-price-grand="38.00">28,00 €</span></p>
+                <div class="button-group">
+                    <button onclick="updatePrice(this, 'petit')">Petit</button>
+                    <button onclick="updatePrice(this, 'grand')">Grand</button>
+                </div>
+                <a href="pagelivraison.html" class="add-to-cart">Acheter</a>
+            </div>
+            <div class="product-item">
+                <img src="https://images.pexels.com/photos/931147/pexels-photo-931147.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bouquet Romantique">
+                <h3>Bouquet Romantique</h3>
+                <p>Prix : <span class="price" data-price-petit="35.00" data-price-grand="45.00">35,00 €</span></p>
+                <div class="button-group">
+                    <button onclick="updatePrice(this, 'petit')">Petit</button>
+                    <button onclick="updatePrice(this, 'grand')">Grand</button>
+                </div>
+                <a href="pagelivraison.html" class="add-to-cart">Acheter</a>
+            </div>
+
+            <!-- Ligne 3 -->
+            <div class="product-item">
+                <img src="https://images.pexels.com/photos/1488310/pexels-photo-1488310.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bouquet Classique">
+                <h3>Bouquet Classique</h3>
+                <p>Prix : <span class="price" data-price-petit="38.00" data-price-grand="48.00">38,00 €</span></p>
+                <div class="button-group">
+                    <button onclick="updatePrice(this, 'petit')">Petit</button>
+                    <button onclick="updatePrice(this, 'grand')">Grand</button>
+                </div>
+                <a href="pagelivraison.html" class="add-to-cart">Acheter</a>
+            </div>
+            <div class="product-item">
+                <img src="https://images.pexels.com/photos/112396/pexels-photo-112396.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bouquet Moderne">
+                <h3>Bouquet El Yasmine</h3>
+                <p>Prix : <span class="price" data-price-petit="42.00" data-price-grand="52.00">42,00 €</span></p>
+                <div class="button-group">
+                    <button onclick="updatePrice(this, 'petit')">Petit</button>
+                    <button onclick="updatePrice(this, 'grand')">Grand</button>
+                </div>
+                <a href="pagelivraison.html" class="add-to-cart">Acheter</a>
+            </div>
+            <div class="product-item">
+                <img src="https://images.pexels.com/photos/3972697/pexels-photo-3972697.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bouquet Naturel">
+                <h3>Bouquet Naturel</h3>
+                <p>Prix : <span class="price" data-price-petit="29.00" data-price-grand="39.00">29,00 €</span></p>
+                <div class="button-group">
+                    <button onclick="updatePrice(this, 'petit')">Petit</button>
+                    <button onclick="updatePrice(this, 'grand')">Grand</button>
+                </div>
+                <a href="pagelivraison.html" class="add-to-cart">Acheter</a>
+            </div>
+
+            <!-- Nouveaux bouquets ajoutés -->
+            <div class="product-item">
+                <img src="https://i.123fleurs.com/18/images/produits/bouquet-pour-toi-livraison-de-fleurs-400x400-48151.jpg" alt="Bouquet Pour Toi">
+                <h3>Bouquet Pour Toi</h3>
+                <p>Prix : <span class="price" data-price-petit="36.00" data-price-grand="46.00">36,00 €</span></p>
+                <div class="button-group">
+                    <button onclick="updatePrice(this, 'petit')">Petit</button>
+                    <button onclick="updatePrice(this, 'grand')">Grand</button>
+                </div>
+                <a href="pagelivraison.html" class="add-to-cart">Acheter</a>
+            </div>
+            <div class="product-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ_QGrYLMVB-hmLBGxtvg4hGZU-75QK-xzfQ&s" alt="Bouquet Éclat">
+                <h3>Bouquet Éclat</h3>
+                <p>Prix : <span class="price" data-price-petit="33.00" data-price-grand="43.00">33,00 €</span></p>
+                <div class="button-group">
+                    <button onclick="updatePrice(this, 'petit')">Petit</button>
+                    <button onclick="updatePrice(this, 'grand')">Grand</button>
+                </div>
+                <a href="pagelivraison.html" class="add-to-cart">Acheter</a>
+            </div>
+            <div class="product-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhXr4DvvgR-YxweBrgIkf1KSh3f99-8S-W-w&s" alt="Bouquet Harmonie">
+                <h3>Bouquet Harmonie</h3>
+                <p>Prix : <span class="price" data-price-petit="37.00" data-price-grand="47.00">37,00 €</span></p>
+                <div class="button-group">
+                    <button onclick="updatePrice(this, 'petit')">Petit</button>
+                    <button onclick="updatePrice(this, 'grand')">Grand</button>
+                </div>
+                <a href="pagelivraison.html" class="add-to-cart">Acheter</a>
+            </div>
+            <div class="product-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbN_bIkd8cgVPoBmWD3dvpfZQJKyWWY-DmXw&s" alt="Bouquet Sérénité">
+                <h3>Bouquet Sérénité</h3>
+                <p>Prix : <span class="price" data-price-petit="39.00" data-price-grand="49.00">39,00 €</span></p>
+                <div class="button-group">
+                    <button onclick="updatePrice(this, 'petit')">Petit</button>
+                    <button onclick="updatePrice(this, 'grand')">Grand</button>
+                </div>
+                <a href="pagelivraison.html" class="add-to-cart">Acheter</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nouvelle section en bas de la page -->
+    <div class="contact-footer">
+        <p>Vous avez une question ou souhaitez passer commande ? Contactez-nous directement.</p>
+    </div>
+
+    <!-- Lien vers le fichier JavaScript externe -->
+    <script>
+        // Fonction pour changer les images automatiquement
+        function changeGalleryImages() {
+            const images = document.querySelectorAll('.gallery img');
+            let currentIndex = 0;
+
+            setInterval(() => {
+                // Masquer toutes les images
+                images.forEach(img => img.classList.remove('active'));
+
+                // Afficher l'image suivante
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.add('active');
+            }, 1000); // Change d'image toutes les secondes
+        }
+
+        // Appeler la fonction pour démarrer le changement d'images
+        changeGalleryImages();
+
+        // Fonction pour mettre à jour le prix
+        function updatePrice(button, size) {
+            const productItem = button.closest('.product-item');
+            const priceElement = productItem.querySelector('.price');
+            const pricePetit = parseFloat(priceElement.getAttribute('data-price-petit'));
+            const priceGrand = parseFloat(priceElement.getAttribute('data-price-grand'));
+
+            if (size === 'petit') {
+                priceElement.textContent = `${pricePetit.toFixed(2)} €`;
+            } else if (size === 'grand') {
+                priceElement.textContent = `${priceGrand.toFixed(2)} €`;
+            }
+
+            const buttons = productItem.querySelectorAll('.button-group button');
+            buttons.forEach(btn => {
+                btn.classList.remove('active', 'inactive');
+                if (btn === button) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.add('inactive');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

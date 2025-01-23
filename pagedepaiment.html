@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Paiement</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600&display=swap");
+
+        body {
+            height: 100vh;
+            padding: 32px;
+            background: #ffffff; /* Fond blanc */
+            font-family: "Libre Franklin", Verdana, sans-serif;
+            color: #697280;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .w-96 {
+            width: 24rem; /* 384px */
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .border {
+            border-width: 1px;
+        }
+
+        .border-gray-400 {
+            border-color: #cbd5e0;
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .h-auto {
+            height: auto;
+        }
+
+        .p-4 {
+            padding: 1rem;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .border-b {
+            border-bottom-width: 1px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        .px-3 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+
+        .bg-white {
+            background-color: #fff;
+        }
+
+        .rounded-sm {
+            border-radius: 0.125rem;
+        }
+
+        .border-gray-300 {
+            border-color: #e2e8f0;
+        }
+
+        .focus-within\:text-gray-900:focus-within {
+            color: #1a202c;
+        }
+
+        .focus-within\:border-gray-500:focus-within {
+            border-color: #a0aec0;
+        }
+
+        .text-xs {
+            font-size: 0.75rem;
+        }
+
+        .tracking-wide {
+            letter-spacing: 0.025em;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .h-8 {
+            height: 2rem;
+        }
+
+        .focus\:outline-none:focus {
+            outline: none;
+        }
+
+        .w-auto {
+            width: auto;
+        }
+
+        .maxlength-3 {
+            maxlength: 3;
+        }
+
+        .h-12 {
+            height: 3rem; /* Bouton moins épais */
+        }
+
+        .bg-rose-clair {
+            background-color: #f9a8d4; /* Rose clair */
+        }
+
+        .hover\:bg-rose-fonce:hover {
+            background-color: #f472b6; /* Rose plus foncé au survol */
+        }
+
+        .focus\:ring-2:focus {
+            box-shadow: 0 0 0 2px rgba(249, 168, 212, 0.5); /* Ombre rose claire */
+        }
+
+        .text-white {
+            color: #fff;
+        }
+
+        .font-bold {
+            font-weight: bold;
+        }
+
+        .text-lg {
+            font-size: 1.125rem; /* Taille de police plus grande */
+        }
+
+        /* Barre de navigation en haut */
+        .top-bar {
+            background-color: #e6e6fa; /* Violet clair */
+            padding: 10px 0; /* Barre moins épaisse */
+            display: flex;
+            justify-content: flex-end; /* Aligner les liens à droite */
+            padding-right: 20px; /* Espacement à droite */
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .top-bar a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            margin: 0 15px;
+            cursor: pointer;
+        }
+
+        .top-bar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Section en bas de la page */
+        .contact-footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #e6e6fa; /* Violet clair */
+            font-size: 16px;
+            color: #333;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        /* Message de confirmation ou d'erreur */
+        .message {
+            position: fixed;
+            bottom: 60px; /* Au-dessus du footer */
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .message.success {
+            background-color: #4caf50; /* Vert pour succès */
+            color: white;
+        }
+
+        .message.error {
+            background-color: #f44336; /* Rouge pour erreur */
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre de navigation en haut -->
+    <div class="top-bar">
+        <a href="pageacceuil.html">Accueil</a>
+        <a href="pagedeconnexion.html">Connexion</a>
+        <a href="pagecontact.html">Contact</a>
+    </div>
+
+    <!-- Formulaire de paiement -->
+    <div class="w-96 mx-auto border border-gray-400 rounded-lg bg-white shadow-lg">
+        <div class="w-full h-auto p-4 flex items-center border-b border-gray-400">
+            <h1 class="w-full text-center">Carte de crédit</h1> <!-- Titre centré -->
+        </div>
+        <div class="w-full h-auto p-4">
+            <form id="payment-form">
+                <div class="mb-4 px-3 py-1 bg-white rounded-sm border border-gray-300 focus-within:text-gray-900 focus-within:border-gray-500">
+                    <label for="cc-name" class="text-xs tracking-wide uppercase font-semibold">Nom sur la carte</label>
+                    <input id="cc-name" type="text" name="cc-name" class="w-full h-8 focus:outline-none" placeholder="ex. Jean Dupont">
+                </div>
+
+                <div class="mb-4 px-3 py-1 bg-white rounded-sm border border-gray-300 focus-within:text-gray-900 focus-within:border-gray-500">
+                    <label for="cc-number" class="text-xs tracking-wide uppercase font-semibold">Numéro de carte</label>
+                    <input id="cc-number" type="text" name="cc-number" class="w-full h-8 focus:outline-none" placeholder="16 chiffres">
+                </div>
+
+                <div class="flex mb-4 px-3 py-1 bg-white rounded-sm border border-gray-300 focus-within:border-gray-500">
+                    <div class="w-full focus-within:text-gray-900">
+                        <label for="cc-expiry" class="text-xs tracking-wide uppercase font-semibold">Date d'expiration</label>
+                        <input id="cc-expiry" type="text" class="w-full h-8 focus:outline-none" placeholder="MM / AAAA">
+                    </div>
+
+                    <div class="w-auto focus-within:text-gray-900">
+                        <label for="cc-cvv" class="text-xs tracking-wide uppercase font-semibold">CVV</label>
+                        <input id="cc-cvv" type="text" class="w-full h-8 focus:outline-none" maxlength="3">
+                    </div>
+                </div>
+
+                <button type="submit" class="h-12 w-full rounded-sm bg-rose-clair tracking-wide font-bold text-lg text-white hover:bg-rose-fonce focus:ring-2 focus:ring-rose-clair">Confirmer le paiement</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Message de confirmation ou d'erreur -->
+    <div id="message" class="message"></div>
+
+    <!-- Section en bas de la page -->
+    <div class="contact-footer">
+        Vous avez une question ou souhaitez passer commande ? Contactez-nous directement.
+    </div>
+
+    <script>
+        // Gestion du formulaire de paiement
+        document.getElementById('payment-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Empêche la soumission du formulaire
+
+            // Récupérer les valeurs des champs
+            const ccName = document.getElementById('cc-name').value.trim();
+            const ccNumber = document.getElementById('cc-number').value.trim();
+            const ccExpiry = document.getElementById('cc-expiry').value.trim();
+            const ccCvv = document.getElementById('cc-cvv').value.trim();
+
+            // Validation du nom sur la carte
+            const nameRegex = /^[A-Za-z\s\-]+$/; // Lettres, espaces et traits d'union
+            if (!nameRegex.test(ccName)) {
+                showMessage('Le nom sur la carte ne doit contenir que des lettres, des espaces et des traits d\'union.', 'error');
+                return;
+            }
+
+            // Validation du numéro de carte (16 chiffres)
+            const cardNumberRegex = /^\d{16}$/; // Exactement 16 chiffres
+            if (!cardNumberRegex.test(ccNumber)) {
+                showMessage('Le numéro de carte doit contenir exactement 16 chiffres.', 'error');
+                return;
+            }
+
+            // Validation de la date d'expiration
+            const expiryRegex = /^(0[1-9]|1[0-2])\/\d{4}$/; // Format MM/AAAA
+            const currentYear = new Date().getFullYear();
+            const expiryYear = parseInt(ccExpiry.split('/')[1], 10);
+
+            if (!expiryRegex.test(ccExpiry)) {
+                showMessage('Le format de la date d\'expiration est invalide. Utilisez MM/AAAA.', 'error');
+                return;
+            }
+
+            if (expiryYear < currentYear) {
+                showMessage('L\'année d\'expiration doit être supérieure ou égale à l\'année en cours.', 'error');
+                return;
+            }
+
+            // Validation du CVV (3 chiffres)
+            const cvvRegex = /^\d{3}$/; // Exactement 3 chiffres
+            if (!cvvRegex.test(ccCvv)) {
+                showMessage('Le CVV doit contenir exactement 3 chiffres.', 'error');
+                return;
+            }
+
+            // Si tout est valide, afficher un message de succès
+            showMessage('Paiement confirmé ! Redirection vers l\'accueil dans 3 secondes...', 'success');
+
+            // Redirection vers la page d'accueil après 3 secondes
+            setTimeout(function () {
+                window.location.href = 'pageacceuil.html';
+            }, 3000);
+        });
+
+        // Fonction pour afficher un message
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = `message ${type}`; // Ajouter la classe de type (success ou error)
+            messageDiv.style.display = 'block';
+
+            // Masquer le message après 3 secondes
+            setTimeout(function () {
+                messageDiv.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

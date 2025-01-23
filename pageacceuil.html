@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Blooms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9J0oDzj33X2s5z8MTIAjN5XUOvSthfvmAo9my2vuaRi2rlAfO66U5uZkdRNXHFbXqRUpHZ1EC06E6yv8DHxRIQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Styles de base */
+        :root {
+            --color-gray: #737888;
+            --color-lighter-gray: #e3e5ed;
+            --color-light-gray: #f7f7fa;
+            --color-primary: #f79aea;
+            --color-secondary: #e6e6fa;
+            --color-text: #343a40;
+            --color-white: #ffffff;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        html {
+            font-family: "Inter", sans-serif;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #fcf7fd;
+            color: var(--color-text);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--color-white);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            height: 80px;
+        }
+
+        .logo img {
+            height: 80px;
+            width: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--color-primary);
+        }
+
+        .header-text {
+            flex-grow: 1;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            margin: 0 20px;
+            color: #000000;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px;
+            background-color: #e9ecef;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 40%;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .hero-video {
+            max-width: 55%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .hero-video video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-text {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color-white);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 50px;
+        }
+
+        .gallery .image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery .image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s;
+        }
+
+        .gallery .image:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery .desc {
+            position: absolute;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: var(--color-white);
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 1rem;
+        }
+
+        /* About, Delivery, Contact Sections */
+        .about, .delivery, .contact {
+            padding: 50px;
+            text-align: center;
+            background-color: var(--color-white);
+        }
+
+        .about h2, .delivery h2, .contact h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about p, .delivery p, .contact p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .delivery .delivery-info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .delivery .delivery-item {
+            flex: 1 1 250px;
+            max-width: 300px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--color-text);
+            color: var(--color-white);
+        }
+
+        footer .social-icons {
+            margin-bottom: 10px;
+        }
+
+        footer .social-icons a {
+            color: var(--color-white);
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        footer .social-icons a:hover {
+            color: #e9afe4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="#">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS66KxfTcITV2NtVhDBIdxqMtlmRDCsvNb_4Q&s" alt="Logo">
+            </a>
+        </div>
+        <p class="header-text">
+            Découvrez nos bouquets de saison!
+            <img src="https://cdn-icons-png.flaticon.com/128/1490/1490679.png" alt="Icon" style="height: 24px; vertical-align: middle; margin-left: 10px;">
+        </p>
+        <nav>
+            <ul>
+                <li><a href="pageacceuil.html">Accueil</a></li>
+                <li><a href="pageproduit.html">Produits</a></li>
+                <li><a href="pagecontact.html">Contact</a></li>
+                <li><a href="pagedeconnexion.html">Connexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Des bouquets uniques pour des moments inoubliables</h1>
+            <p>Découvrez la beauté des fleurs fraîches avec nos bouquets soigneusement composés. Parfaits pour célébrer les moments précieux de la vie.</p>
+        </div>
+        <div class="hero-video">
+            <video autoplay loop muted playsinline>
+                <source src="https://videos.pexels.com/video-files/30291449/12985610_640_360_24fps.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo.
+            </video>
+            <div class="video-text">
+                <a href="pageproduit.html" style="text-decoration: none; color: white;">Explore More !</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+        <div class="image">
+            <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?q=80&w=2574&auto=format&fit=crop" alt="Vase Bouquet 1">
+            <div class="desc">Vase Bouquet 1</div>
+        </div>
+        <div class="image">
+            <img src="https://images.unsplash.com/photo-1622658641558-235f26dd270b?q=80&w=2574&auto=format&fit=crop" alt="Paper Wrapped Bouquet 1">
+            <div class="desc">Paper Wrapped Bouquet 1</div>
+        </div>
+        <div class="image">
+            <img src="https://images.unsplash.com/photo-1533616688419-b7a585564566?q=80&w=2574&auto=format&fit=crop" alt="Vase Bouquet 2">
+            <div class="desc">Vase Bouquet 2</div>
+        </div>
+        <div class="image">
+            <img src="https://images.unsplash.com/photo-1622658641561-fe2ca339b039?q=80&w=2574&auto=format&fit=crop" alt="Paper Wrapped Bouquet 2">
+            <div class="desc">Paper Wrapped Bouquet 2</div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <h2>À Propos de Nous</h2>
+        <p>Depuis plus de 20 ans, nous créons des bouquets uniques avec des fleurs fraîches et locales. Notre passion pour les fleurs se reflète dans chaque création, conçue pour rendre vos moments spéciaux encore plus mémorables.</p>
+    </section>
+
+    <section class="delivery" id="delivery">
+        <h2>Livraison</h2>
+        <p>Nous offrons un service de livraison rapide et fiable pour vous permettre de recevoir vos bouquets directement chez vous ou à l'adresse de votre choix.</p>
+        <div class="delivery-info">
+            <div class="delivery-item">
+                <h3>Livraison Standard</h3>
+                <p>Livraison sous 24 à 48 heures.</p>
+            </div>
+            <div class="delivery-item">
+                <h3>Livraison Express</h3>
+                <p>Livraison le jour même pour les commandes passées avant midi.</p>
+            </div>
+            <div class="delivery-item">
+                <h3>Points Relais</h3>
+                <p>Retrait disponible dans nos points relais partenaires.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>Contactez-Nous</h2>
+        <p>Vous avez une question ou souhaitez passer commande ? Contactez-nous directement.</p>
+    </section>
+
+    <footer>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+        </div>
+        <p>&copy; 2025 Beautiful Blooms Co. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Lien vers le fichier JavaScript externe -->
+    <script src="js/script.js"></script>
+</body>
+</html>

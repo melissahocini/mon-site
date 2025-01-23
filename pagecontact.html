@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactez-nous</title>
+    <style>
+        /* Styles de base */
+        :root {
+            --color-gray: #737888;
+            --color-lighter-gray: #e3e5ed;
+            --color-light-gray: #f7f7fa;
+            --color-primary: #f79aea;
+            --color-secondary: #e6e6fa;
+            --color-text: #343a40;
+            --color-white: #ffffff;
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        html {
+            font-family: "Inter", sans-serif;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #fcf7fd;
+            color: var(--color-text);
+        }
+
+        /* Barre violette clair en haut avec les liens */
+        .top-bar {
+            background-color: #f3e5f5; /* Violet très clair */
+            padding: 15px 20px; /* Barre plus épaisse */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        }
+
+        .top-bar .header {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .top-bar .top-links a {
+            text-decoration: none;
+            color: var(--color-text);
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .top-bar .top-links a:hover {
+            color: var(--color-primary);
+        }
+
+        /* Conteneur pour le texte au milieu de la page */
+        .text-container {
+            text-align: center;
+            margin: auto;
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.8); /* Fond semi-transparent */
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            position: relative;
+            margin-top: 100px;
+            overflow: hidden;
+        }
+
+        /* Vidéo en arrière-plan du cadre "Contactez-nous" */
+        .text-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://videos.pexels.com/video-files/854701/854701-sd_640_360_24fps.mp4') no-repeat center center/cover;
+            z-index: -1;
+            filter: blur(5px); /* Flou léger pour la vidéo */
+        }
+
+        .text-container h1 {
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffb6c1, #e6e6fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0 0 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .text-container p {
+            font-size: 24px;
+            color: var(--color-text);
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-container p strong {
+            color: #ff69b4;
+        }
+
+        /* Animation pour le conteneur */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .text-container {
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Effet de survol sur les liens */
+        .top-links a {
+            position: relative;
+        }
+
+        .top-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-primary);
+            bottom: -5px;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .top-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre violette clair en haut avec les liens -->
+    <div class="top-bar">
+        <div class="header">
+            <div class="top-links">
+                <a href="pageacceuil.html">Accueil</a>
+                <a href="pagedeconnexion.html">Connexion</a>
+                <a href="pagelivraison.html">Livraison</a>
+                <a href="pagecontact.html">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteneur pour le texte au milieu de la page -->
+    <div class="text-container">
+        <h1>Contactez-nous</h1>
+        <p><strong>Téléphone :</strong> 03 62 27 01 50</p>
+        <p>Du lundi au vendredi 9h-12h et 14h-18h</p>
+        <p><strong>Email :</strong> flowershop@gmail.com</p>
+    </div>
+
+    <!-- Lien vers le fichier JavaScript externe -->
+    <script src="js/script.js"></script>
+</body>
+</html>
